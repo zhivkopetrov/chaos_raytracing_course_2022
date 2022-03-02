@@ -14,8 +14,9 @@ set(_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
    
 add_executable(
     ${PROJECT_NAME} 
-        ${_INC_DIR}/Dummy.h
+        ${_INC_DIR}/geometry/BatmanGeometry.h
      
+        ${_SRC_DIR}/geometry/BatmanGeometry.cpp
         ${_SRC_DIR}/main.cpp
 )
 

@@ -3,6 +3,7 @@
 
 // System headers
 #include <cstdint>
+#include <iosfwd>
 
 // Other libraries headers
 

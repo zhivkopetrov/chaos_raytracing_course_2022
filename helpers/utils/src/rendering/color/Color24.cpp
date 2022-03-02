@@ -2,6 +2,7 @@
 #include "utils/rendering/color/Color24.h"
 
 // System headers
+#include <ostream>
 
 // Other libraries headers
 
@@ -43,3 +44,10 @@ bool Color24::operator!=(const Color24 &other) const {
 uint32_t Color24::get24BitRgbPalette() const {
   return (rgb.r & 0xFF000000) | (rgb.g & 0x00FF0000) | (rgb.b & 0x0000FF00);
 }
+
+std::ostream& operator<<(std::ostream &out, const Color24& color) {
+  const auto& rgb = color.rgb;
+  out << (int)rgb.r << ' ' << (int)rgb.g << ' ' << (int)rgb.b << '\t';
+  return out;
+}
+

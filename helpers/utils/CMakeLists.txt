@@ -19,11 +19,16 @@ add_library(
         ${_INC_DIR}/class/NonMoveable.h
         ${_INC_DIR}/concurrency/ThreadSafeQueue.h
         ${_INC_DIR}/data_type/EnumClassUtils.h
+        ${_INC_DIR}/data_type/FloatingPoint.h
+        ${_INC_DIR}/file/PpmFileWritter.h
+        ${_INC_DIR}/geometry/Point2f.h
         ${_INC_DIR}/rendering/color/Color24.h
         ${_INC_DIR}/rendering/color/Color32.h
         ${_INC_DIR}/time/Time.h
         ${_INC_DIR}/ErrorCode.h
         
+        ${_SRC_DIR}/file/PpmFileWritter.cpp
+        ${_SRC_DIR}/geometry/Point2f.cpp
         ${_SRC_DIR}/rendering/color/Color24.cpp
         ${_SRC_DIR}/rendering/color/Color32.cpp
         ${_SRC_DIR}/time/Time.cpp

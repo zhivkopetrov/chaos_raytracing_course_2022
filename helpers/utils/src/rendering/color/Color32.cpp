@@ -48,3 +48,5 @@ uint32_t Color32::get32BitRgbaPalette() const {
   return (rgba.r & 0xFF000000) | (rgba.g & 0x00FF0000) | (rgba.b & 0x0000FF00)
          | (rgba.a & 0x000000FF);
 }
+
+

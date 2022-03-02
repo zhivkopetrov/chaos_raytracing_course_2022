@@ -3,6 +3,7 @@
 
 // System headers
 #include <cstdint>
+#include <iosfwd>
 
 // Other libraries headers
 
@@ -35,6 +36,8 @@ public:
 
   RGB rgb;
 };
+
+std::ostream& operator<<(std::ostream &out, const Color24& color);
 
 namespace Colors24 {
 extern const Color24 RED;
