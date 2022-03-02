@@ -1,0 +1,8 @@
+#ifndef IMAGES_AND_COLORS_DUMMY_H_
+#define IMAGES_AND_COLORS_DUMMY_H_
+
+
+
+
+
+#endif /* IMAGES_AND_COLORS_DUMMY_H_ */
