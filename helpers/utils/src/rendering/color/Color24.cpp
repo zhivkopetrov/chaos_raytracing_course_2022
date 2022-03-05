@@ -45,9 +45,10 @@ uint32_t Color24::get24BitRgbPalette() const {
   return (rgb.r & 0xFF000000) | (rgb.g & 0x00FF0000) | (rgb.b & 0x0000FF00);
 }
 
-std::ostream& operator<<(std::ostream &out, const Color24& color) {
-  const auto& rgb = color.rgb;
-  out << (int)rgb.r << ' ' << (int)rgb.g << ' ' << (int)rgb.b << '\t';
+std::ostream& operator<<(std::ostream &out, const Color24 &color) {
+  const auto &rgb = color.rgb;
+  out << static_cast<int32_t>(rgb.r) << ' ' << static_cast<int32_t>(rgb.g)
+      << ' ' << static_cast<int32_t>(rgb.b) << '\t';
   return out;
 }
 
