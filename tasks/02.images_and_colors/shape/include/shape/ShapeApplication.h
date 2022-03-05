@@ -8,7 +8,6 @@
 #include "utils/ErrorCode.h"
 
 // Own components headers
-#include "shape/geometry/BatmanWorkDispatcher.h"
 #include "shape/config/ShapeConfig.h"
 
 // Forward declarations

@@ -8,6 +8,7 @@
 #include "utils/time/Time.h"
 
 // Own components headers
+#include "shape/helpers/BatmanWorkDispatcher.h"
 
 ErrorCode ShapeApplication::run(const ShapeConfig &cfg) {
   Time time;

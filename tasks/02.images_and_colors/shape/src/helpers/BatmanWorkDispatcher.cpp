@@ -1,5 +1,5 @@
 // Corresponding header
-#include "shape/geometry/BatmanWorkDispatcher.h"
+#include "shape/helpers/BatmanWorkDispatcher.h"
 
 // System headers
 #include <thread>
