@@ -14,9 +14,21 @@ set(_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
    
 add_executable(
     ${PROJECT_NAME} 
-        ${_INC_DIR}/Dummy.h
+        ${_INC_DIR}/CrtApplication.h
+        ${_INC_DIR}/config/CrtConfig.h
+        ${_INC_DIR}/config/CrtConfigLoader.h
+        ${_INC_DIR}/defines/CrtDefines.h
+        ${_INC_DIR}/geometry/PixelRegion.h
+        ${_INC_DIR}/geometry/config/PixelRegionConfig.h
+        ${_INC_DIR}/helpers/CrtWorkDispatcher.h
+        
      
         ${_SRC_DIR}/main.cpp
+        ${_SRC_DIR}/CrtApplication.cpp
+        ${_SRC_DIR}/config/CrtConfigLoader.cpp
+        ${_SRC_DIR}/defines/CrtDefines.cpp
+        ${_SRC_DIR}/geometry/PixelRegion.cpp
+        ${_SRC_DIR}/helpers/CrtWorkDispatcher.cpp
 )
 
 target_include_directories(

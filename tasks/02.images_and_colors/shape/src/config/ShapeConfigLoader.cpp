@@ -9,6 +9,7 @@
 
 namespace {
 //TODO read values from a file
+constexpr auto FILE_NAME = "batman.ppm";
 constexpr auto IMAGE_WIDTH = 1920;
 constexpr auto IMAGE_HEIGHT = 1080;
 constexpr auto BATMAN_ORIGIN_X = IMAGE_WIDTH / 2;
@@ -22,7 +23,7 @@ ShapeConfig ShapeConfigLoader::loadConfig() {
   ShapeConfig cfg;
 
   auto& imageCfg = cfg.imageCfg;
-  imageCfg.name = "batman.ppm";
+  imageCfg.name = FILE_NAME;
   imageCfg.width = IMAGE_WIDTH;
   imageCfg.height = IMAGE_HEIGHT;
 
