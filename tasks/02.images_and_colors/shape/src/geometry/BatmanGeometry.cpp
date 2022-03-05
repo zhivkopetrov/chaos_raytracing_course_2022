@@ -8,12 +8,10 @@
 
 // Own components headers
 
-// Forward declarations
-
 namespace {
-constexpr double HASH_1 = (6 * sqrt(10)) / 7;
-constexpr double HASH_2 = HASH_1 / 2;
-constexpr double HASH_3 = ( (3 * sqrt(33)) - 7) / 112;
+const double HASH_1 = (6 * sqrt(10)) / 7;
+const double HASH_2 = HASH_1 / 2;
+const double HASH_3 = ( (3 * sqrt(33)) - 7) / 112;
 }
 
 bool BatmanGeometry::inOval(const Point2f &target, const Point2f &origin,

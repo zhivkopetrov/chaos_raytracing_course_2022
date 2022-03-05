@@ -27,7 +27,6 @@ struct PpmHeader {
 
 class PpmFileWritter {
 public:
-
   ErrorCode writeFile(const std::string &file, const PpmHeader &header,
                       const std::vector<Color24> &pixels);
 

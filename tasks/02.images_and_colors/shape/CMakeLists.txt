@@ -13,11 +13,20 @@ set(_INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${_INC_FOLDER_NAME}/${PROJECT_NAME})
 set(_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
    
 add_executable(
-    ${PROJECT_NAME} 
+    ${PROJECT_NAME}
+        ${_INC_DIR}/ShapeApplication.h
+        ${_INC_DIR}/config/ShapeConfig.h
+        ${_INC_DIR}/config/ShapeConfigLoader.h
         ${_INC_DIR}/geometry/BatmanGeometry.h
+        ${_INC_DIR}/geometry/BatmanWorkDispatcher.h
+        ${_INC_DIR}/geometry/config/BatmanShapeConfig.h
+        
      
-        ${_SRC_DIR}/geometry/BatmanGeometry.cpp
         ${_SRC_DIR}/main.cpp
+        ${_SRC_DIR}/ShapeApplication.cpp
+        ${_SRC_DIR}/config/ShapeConfigLoader.cpp
+        ${_SRC_DIR}/geometry/BatmanGeometry.cpp
+        ${_SRC_DIR}/geometry/BatmanWorkDispatcher.cpp
 )
 
 target_include_directories(

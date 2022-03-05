@@ -8,3 +8,11 @@ cmake --build . -j
 
 Running executables:
 ./tasks/02.images_and_colors/shape/shape
+
+General TODOs:
+- Improve logging
+- Read configs from a file
+
+Tested on compilers:
+- g++
+- clang++
