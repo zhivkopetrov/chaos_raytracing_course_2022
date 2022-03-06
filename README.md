@@ -1,6 +1,10 @@
 # chaos_raytracing_course_2022
 Chaos raytracing course 2022
 
+Requirements:
+- C++ compiler
+- cmake
+
 Build steps:
 step into the 'build' folder
 configure and build the project based on your compiler settings
