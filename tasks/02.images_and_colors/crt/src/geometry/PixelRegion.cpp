@@ -15,7 +15,7 @@ void randomizeRedComponent(std::mt19937 &generator,
                            std::vector<Color24> &outPixels) {
   std::uniform_int_distribution<> distr(0, 255);
   for (auto &pixel : outPixels) {
-    pixel.rgb.r = distr(generator);
+    pixel.rgb.r = static_cast<uint8_t>(distr(generator));
   }
 }
 
@@ -23,7 +23,7 @@ void randomizeGreenComponent(std::mt19937 &generator,
                              std::vector<Color24> &outPixels) {
   std::uniform_int_distribution<> distr(0, 255);
   for (auto &pixel : outPixels) {
-    pixel.rgb.g = distr(generator);
+    pixel.rgb.g = static_cast<uint8_t>(distr(generator));
   }
 }
 
@@ -31,7 +31,7 @@ void randomizeBlueComponent(std::mt19937 &generator,
                             std::vector<Color24> &outPixels) {
   std::uniform_int_distribution<> distr(0, 255);
   for (auto &pixel : outPixels) {
-    pixel.rgb.b = distr(generator);
+    pixel.rgb.b = static_cast<uint8_t>(distr(generator));
   }
 }
 

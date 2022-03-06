@@ -62,8 +62,8 @@ ErrorCode PpmFileWritter::openStream(const std::string &file) {
   //RAII dtor will close the stream when finished
   _fileStream.open(file.c_str(), std::ios::out | std::ios::binary);
   if (!_fileStream) {
-    std::cerr << "Error, file: [" << file << "] could not be created. Reason: "
-              << strerror(errno) << std::endl;
+    std::cerr << "Error, file: [" << file << "] could not be created"
+              << std::endl;
     return ErrorCode::FAILURE;
   }
 
@@ -71,7 +71,7 @@ ErrorCode PpmFileWritter::openStream(const std::string &file) {
 }
 
 void PpmFileWritter::doWrite(const PpmHeader &header,
-                             [[maybe_unused]]const std::vector<Color24> &pixels) {
+                             const std::vector<Color24> &pixels) {
   _fileStream << "P3\n" << header.imageWidth << ' ' << header.imageHeight
               << '\n' << header.maxColorComponent << '\n';
 

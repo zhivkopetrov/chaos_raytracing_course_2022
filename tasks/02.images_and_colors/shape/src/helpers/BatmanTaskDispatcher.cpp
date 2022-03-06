@@ -25,9 +25,9 @@ void calculateGeometryChunk(const BatmanShapeConfig &cfg,
   Point2f target;
   int32_t relativePixelId = 0;
   for (int32_t row = 0; row < rowsToCalculate; ++row) {
-    target.y = row + startRowIdx;
+    target.y = static_cast<float>(row + startRowIdx);
     for (int32_t col = 0; col < rowWidth; ++col) {
-      target.x = col;
+      target.x = static_cast<float>(col);
       if (!BatmanGeometry::inOval(target, cfg.origin, cfg.ovalRadius)) {
         ++relativePixelId;
         continue;
