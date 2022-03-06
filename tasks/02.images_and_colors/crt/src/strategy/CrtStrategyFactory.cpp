@@ -21,7 +21,9 @@ std::unique_ptr<CrtStrategyBase> CrtStrategyFactory::createStrategy(
     return std::make_unique<CrtMultipleProducers>(cfg.workerThreadsHint);
 
   case CrtStrategy::MULTIPLE_PRODUCERS_SINGLE_ASYNC_CONSUMER:
-    return std::make_unique<CrtSingleThread>();
+    std::cout << "Strategy is not implemented yet. "
+        "Falling back to MULTIPLE_PRODUCERS\n";
+    return std::make_unique<CrtMultipleProducers>(cfg.workerThreadsHint);
 
   default:
     std::cerr << "Error, received unsupported CrtStrategy: "
