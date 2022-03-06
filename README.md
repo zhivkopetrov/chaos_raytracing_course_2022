@@ -8,19 +8,19 @@ configure and build the project based on your compiler settings
 Compiler specific setup:
 configuration + build (alternatively use the compiler specific front end API)
 
-1) g++
+g++
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_CXX_COMPILER=/usr/bin/g++
 cmake --build . -j
 
-2) clang++
+clang++
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_CXX_COMPILER=/usr/bin/clang++
 cmake --build . -j
 
-3) MSVC
+MSVC
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 16 2019"
 cmake --build . -j
 
-4) MinGW - fail. MinGW does not contain <thread> implementation
+MinGW - fail. MinGW does not contain <thread> implementation
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"
 cmake --build . -j
 
