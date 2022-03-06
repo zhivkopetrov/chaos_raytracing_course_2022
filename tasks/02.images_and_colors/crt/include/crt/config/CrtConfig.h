@@ -10,6 +10,7 @@
 // Own components headers
 #include "crt/defines/CrtDefines.h"
 #include "crt/geometry/config/PixelRegionConfig.h"
+#include "crt/strategy/config/StrategyConfig.h"
 
 // Forward declarations
 

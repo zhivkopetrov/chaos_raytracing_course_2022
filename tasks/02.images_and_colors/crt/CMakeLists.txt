@@ -23,6 +23,8 @@ add_executable(
         ${_INC_DIR}/strategy/CrtStrategyFactory.h
         ${_INC_DIR}/strategy/CrtStrategyBase.h
         ${_INC_DIR}/strategy/CrtSingleThread.h
+        ${_INC_DIR}/strategy/CrtMultipleProducers.h
+        ${_INC_DIR}/strategy/config/StrategyConfig.h
         
      
         ${_SRC_DIR}/main.cpp
@@ -32,6 +34,7 @@ add_executable(
         ${_SRC_DIR}/geometry/PixelRegion.cpp
         ${_SRC_DIR}/strategy/CrtStrategyFactory.cpp
         ${_SRC_DIR}/strategy/CrtSingleThread.cpp
+        ${_SRC_DIR}/strategy/CrtMultipleProducers.cpp
 )
 
 target_include_directories(
@@ -50,6 +53,6 @@ target_link_libraries(
 set_target_cpp_standard(${PROJECT_NAME} 20)
 enable_target_warnings(${PROJECT_NAME})
 set_target_visibility(${PROJECT_NAME})
-#enable_target_sanitizer(${PROJECT_NAME} "address")
+#enable_target_sanitizer(${PROJECT_NAME} "thread")
 
     

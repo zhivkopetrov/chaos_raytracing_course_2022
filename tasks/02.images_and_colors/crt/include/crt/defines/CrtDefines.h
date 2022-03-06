@@ -10,6 +10,10 @@
 
 // Forward declarations
 
+enum class PixelRegionType {
+  RED, GREEN, BLUE, YELLOW, MAGENTA, CYAN
+};
+
 enum class CrtStrategy {
   SINGLE_THREAD,
   MULTIPLE_PRODUCERS,

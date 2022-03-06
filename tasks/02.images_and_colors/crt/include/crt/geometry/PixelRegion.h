@@ -8,12 +8,9 @@
 #include "utils/rendering/color/Color24.h"
 
 // Own components headers
+#include "crt/defines/CrtDefines.h"
 
 // Forward declarations
-
-enum class PixelRegionType {
-  RED, GREEN, BLUE, YELLOW, MAGENTA, CYAN
-};
 
 class PixelRegion {
 public:

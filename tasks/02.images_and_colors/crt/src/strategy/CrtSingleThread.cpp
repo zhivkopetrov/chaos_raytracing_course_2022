@@ -3,7 +3,6 @@
 
 // System headers
 #include <random>
-#include <array>
 
 // Other libraries headers
 
@@ -21,27 +20,18 @@ std::vector<Color24> CrtSingleThread::generatePixelRegions(
   const auto regionWidth = imageCfg.width / regionCols;
   const auto regionHeight = imageCfg.height / regionRows;
 
-  constexpr auto colorPatternSize = 6;
-  constexpr std::array<PixelRegionType, colorPatternSize> colorPatterns {
-      PixelRegionType::RED, PixelRegionType::GREEN, PixelRegionType::BLUE,
-      PixelRegionType::YELLOW, PixelRegionType::MAGENTA, PixelRegionType::CYAN };
-
   auto patternId = 0;
   for (int32_t row = 0; row < regionRows; ++row) {
     for (int32_t col = 0; col < regionCols; ++col) {
       const auto regionPixels = PixelRegion::produceRandomized(regionWidth,
-          regionHeight, colorPatterns[patternId], mt);
+          regionHeight, _colorPattern[patternId % COLOR_PATTERN_SIZE], mt);
+      ++patternId;
 
       const auto imgPixelOffset = (row * regionHeight * imageCfg.width)
           + (col * regionWidth);
 
       PixelRegion::copy(regionWidth, regionHeight, imageCfg.width, regionPixels,
           &imagePixels[imgPixelOffset]);
-
-      ++patternId;
-      if (colorPatternSize == patternId) {
-        patternId = 0;
-      }
     }
   }
 

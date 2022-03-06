@@ -13,10 +13,10 @@ namespace {
 constexpr auto FILE_NAME = "crt.ppm";
 constexpr auto IMAGE_WIDTH = 1920;
 constexpr auto IMAGE_HEIGHT = 1080;
-constexpr auto PIXELS_REGION_ROWS = 4;
-constexpr auto PIXEL_REGIONS_PER_ROW = 4;
+constexpr auto PIXEL_REGION_ROWS = 12;
+constexpr auto PIXEL_REGIONS_PER_ROW = 8;
 
-constexpr auto STRATEGY_IDENTIFIER = "single_thread";
+constexpr auto STRATEGY_IDENTIFIER = "multiple_producers";
 constexpr auto WORKER_THREADS_HINT = 0;
 }
 
@@ -29,7 +29,7 @@ CrtConfig CrtConfigLoader::loadConfig() {
   imageCfg.height = IMAGE_HEIGHT;
 
   auto& pixelRegionCfg = cfg.pixelRegionCfg;
-  pixelRegionCfg.pixelRegionsRows = PIXELS_REGION_ROWS;
+  pixelRegionCfg.pixelRegionsRows = PIXEL_REGION_ROWS;
   pixelRegionCfg.pixelRegionsPerRow = PIXEL_REGIONS_PER_ROW;
 
   auto& strategyCfg = cfg.strategyCfg;
