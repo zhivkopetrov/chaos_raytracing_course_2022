@@ -1,5 +1,5 @@
-#ifndef SHAPE_BATMANWORKDISPATCHER_H_
-#define SHAPE_BATMANWORKDISPATCHER_H_
+#ifndef SHAPE_BATMANTASKDISPATCHER_H_
+#define SHAPE_BATMANTASKDISPATCHER_H_
 
 // System headers
 #include <vector>
@@ -13,9 +13,9 @@
 
 // Forward declarations
 
-class BatmanWorkDispatcher {
+class BatmanTaskDispatcher {
 public:
-  BatmanWorkDispatcher() = delete;
+  BatmanTaskDispatcher() = delete;
 
   //return value optimization should kick in
   static std::vector<Color24> calculateGeometry(const BatmanShapeConfig &cfg,
@@ -23,4 +23,4 @@ public:
                                                 int32_t imageHeight);
 };
 
-#endif /* SHAPE_BATMANWORKDISPATCHER_H_ */
+#endif /* SHAPE_BATMANTASKDISPATCHER_H_ */

@@ -19,9 +19,14 @@ class PixelRegion {
 public:
   PixelRegion() = delete;
 
-  static void randomize(PixelRegionType type, std::mt19937 &generator,
-                        std::vector<Color24> &outPixels);
+  static std::vector<Color24> produceRandomized(int32_t regionWidth,
+                                                int32_t regionHeight,
+                                                PixelRegionType type,
+                                                std::mt19937 &generator);
 
+  static void copy(int32_t regionWidth, int32_t regionHeight,
+                   int32_t imageWidth, const std::vector<Color24> &srcPixels,
+                   Color24 *destPixels);
 };
 
 #endif /* CRT_PIXELREGION_H_ */

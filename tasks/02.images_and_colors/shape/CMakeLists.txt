@@ -19,14 +19,14 @@ add_executable(
         ${_INC_DIR}/config/ShapeConfigLoader.h
         ${_INC_DIR}/geometry/BatmanGeometry.h
         ${_INC_DIR}/geometry/config/BatmanShapeConfig.h
-        ${_INC_DIR}/helpers/BatmanWorkDispatcher.h
+        ${_INC_DIR}/helpers/BatmanTaskDispatcher.h
         
      
         ${_SRC_DIR}/main.cpp
         ${_SRC_DIR}/ShapeApplication.cpp
         ${_SRC_DIR}/config/ShapeConfigLoader.cpp
         ${_SRC_DIR}/geometry/BatmanGeometry.cpp
-        ${_SRC_DIR}/helpers/BatmanWorkDispatcher.cpp
+        ${_SRC_DIR}/helpers/BatmanTaskDispatcher.cpp
 )
 
 target_include_directories(

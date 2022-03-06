@@ -8,12 +8,12 @@
 #include "utils/time/Time.h"
 
 // Own components headers
-#include "shape/helpers/BatmanWorkDispatcher.h"
+#include "shape/helpers/BatmanTaskDispatcher.h"
 
 ErrorCode ShapeApplication::run(const ShapeConfig &cfg) {
   Time time;
   const auto &imageCfg = cfg.imageCfg;
-  const auto pixels = BatmanWorkDispatcher::calculateGeometry(
+  const auto pixels = BatmanTaskDispatcher::calculateGeometry(
       cfg.batmanShapeCfg, imageCfg.width, imageCfg.height);
 
   const auto err = saveOutput(cfg.imageCfg, pixels);

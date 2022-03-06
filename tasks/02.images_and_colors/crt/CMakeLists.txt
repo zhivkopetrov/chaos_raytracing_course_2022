@@ -20,7 +20,9 @@ add_executable(
         ${_INC_DIR}/defines/CrtDefines.h
         ${_INC_DIR}/geometry/PixelRegion.h
         ${_INC_DIR}/geometry/config/PixelRegionConfig.h
-        ${_INC_DIR}/helpers/CrtWorkDispatcher.h
+        ${_INC_DIR}/strategy/CrtStrategyFactory.h
+        ${_INC_DIR}/strategy/CrtStrategyBase.h
+        ${_INC_DIR}/strategy/CrtSingleThread.h
         
      
         ${_SRC_DIR}/main.cpp
@@ -28,7 +30,8 @@ add_executable(
         ${_SRC_DIR}/config/CrtConfigLoader.cpp
         ${_SRC_DIR}/defines/CrtDefines.cpp
         ${_SRC_DIR}/geometry/PixelRegion.cpp
-        ${_SRC_DIR}/helpers/CrtWorkDispatcher.cpp
+        ${_SRC_DIR}/strategy/CrtStrategyFactory.cpp
+        ${_SRC_DIR}/strategy/CrtSingleThread.cpp
 )
 
 target_include_directories(

@@ -10,6 +10,7 @@
 // Own components headers
 
 namespace {
+
 void randomizeRedComponent(std::mt19937 &generator,
                            std::vector<Color24> &outPixels) {
   std::uniform_int_distribution<> distr(0, 255);
@@ -33,36 +34,62 @@ void randomizeBlueComponent(std::mt19937 &generator,
     pixel.rgb.b = distr(generator);
   }
 }
-}
-void PixelRegion::randomize(PixelRegionType type, std::mt19937 &generator,
-                            std::vector<Color24> &outPixels) {
+
+} //end anonymous namespace
+
+std::vector<Color24> PixelRegion::produceRandomized(int32_t regionWidth,
+                                                    int32_t regionHeight,
+                                                    PixelRegionType type,
+                                                    std::mt19937 &generator) {
+  std::vector<Color24> pixels(regionWidth * regionHeight, Colors24::BLACK);
   switch (type) {
   case PixelRegionType::RED:
-    randomizeRedComponent(generator, outPixels);
+    randomizeRedComponent(generator, pixels);
     break;
   case PixelRegionType::GREEN:
-    randomizeGreenComponent(generator, outPixels);
+    randomizeGreenComponent(generator, pixels);
     break;
   case PixelRegionType::BLUE:
-    randomizeBlueComponent(generator, outPixels);
+    randomizeBlueComponent(generator, pixels);
     break;
   case PixelRegionType::YELLOW:
-    randomizeRedComponent(generator, outPixels);
-    randomizeGreenComponent(generator, outPixels);
+    randomizeRedComponent(generator, pixels);
+    randomizeGreenComponent(generator, pixels);
     break;
   case PixelRegionType::MAGENTA:
-    randomizeRedComponent(generator, outPixels);
-    randomizeBlueComponent(generator, outPixels);
+    randomizeRedComponent(generator, pixels);
+    randomizeBlueComponent(generator, pixels);
     break;
   case PixelRegionType::CYAN:
-    randomizeGreenComponent(generator, outPixels);
-    randomizeBlueComponent(generator, outPixels);
+    randomizeGreenComponent(generator, pixels);
+    randomizeBlueComponent(generator, pixels);
     break;
   default:
     std::cerr << "Error, received unsupported PixelRegionType: "
               << getEnumValue(type)
-              << ". Returrning result for PixelRegionType::RED" << std::endl;
-    randomizeRedComponent(generator, outPixels);
+              << ". Returning result for PixelRegionType::RED" << std::endl;
+    randomizeRedComponent(generator, pixels);
     break;
   }
+
+  return pixels;
 }
+
+void PixelRegion::copy(int32_t regionWidth, int32_t regionHeight,
+                       int32_t imageWidth,
+                       const std::vector<Color24> &srcPixels,
+                       Color24 *destPixels) {
+  int32_t offset = 0;
+  int32_t srcPixelId = 0;
+  for (int32_t row = 0; row < regionHeight; ++row) {
+    for (int32_t col = 0; col < regionWidth; ++col) {
+      destPixels[offset] = srcPixels[srcPixelId];
+      ++offset;
+      ++srcPixelId;
+    }
+
+    //move to next image row
+    offset += (imageWidth - regionWidth);
+  }
+}
+

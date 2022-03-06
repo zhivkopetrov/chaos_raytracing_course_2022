@@ -1,5 +1,5 @@
 // Corresponding header
-#include "shape/helpers/BatmanWorkDispatcher.h"
+#include "shape/helpers/BatmanTaskDispatcher.h"
 
 // System headers
 #include <thread>
@@ -43,7 +43,7 @@ void calculateGeometryChunk(const BatmanShapeConfig &cfg,
 }
 }
 
-std::vector<Color24> BatmanWorkDispatcher::calculateGeometry(
+std::vector<Color24> BatmanTaskDispatcher::calculateGeometry(
     const BatmanShapeConfig &cfg, int32_t imageWidth, int32_t imageHeight) {
   std::vector<Color24> pixels(imageWidth * imageHeight, Colors24::YELLOW);
   const auto maxThreads = getMaxSupportedThreadsCount();
