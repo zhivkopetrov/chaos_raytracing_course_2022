@@ -6,28 +6,22 @@ step into the 'build' folder
 configure and build the project based on your compiler settings
 
 Compiler specific setup:
+configuration + build (alternatively use the compiler specific front end API)
+
 1) g++
-#configure
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_CXX_COMPILER=/usr/bin/g++
-#build (alternatively use the compiler specific front end API)
 cmake --build . -j
 
 2) clang++
-#configure
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_CXX_COMPILER=/usr/bin/clang++
-#build (alternatively use the compiler specific front end API)
 cmake --build . -j
 
 3) MSVC
-#configure
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 16 2019"
-#build (alternatively use the compiler specific front end API)
 cmake --build . -j
 
 4) MinGW - fail. MinGW does not contain <thread> implementation
-#configure
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"
-#build (alternatively use the compiler specific front end API)
 cmake --build . -j
 
 Running executables:
