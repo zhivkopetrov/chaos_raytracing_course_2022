@@ -13,10 +13,10 @@ class Time {
 public:
   Time& getElapsed();
 
-  int64_t toSeconds() const;
-  int64_t toMilliseconds() const;
-  int64_t toMicroseconds() const;
-  int64_t toNanoseconds() const;
+  size_t toSeconds() const;
+  size_t toMilliseconds() const;
+  size_t toMicroseconds() const;
+  size_t toNanoseconds() const;
 
 private:
   std::chrono::time_point<std::chrono::steady_clock> _now =
