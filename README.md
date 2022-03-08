@@ -21,7 +21,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_CXX_COMPILER=/us
 cmake --build . -j
 
 3) MSVC
-cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 16 2019"
+cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 17 2022"
 cmake --build . -j
 
 4) MinGW - fail. MinGW does not contain <thread> implementation
