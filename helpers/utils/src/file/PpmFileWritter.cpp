@@ -4,25 +4,25 @@
 // System headers
 #include <cerrno>
 #include <cstring>
-#include <iostream>
 
 // Other libraries headers
-#include "utils/data_type/EnumClassUtils.h"
 
 // Own components headers
+#include "utils/data_type/EnumClassUtils.h"
+#include "utils/log/Log.h"
 
 ErrorCode PpmFileWritter::writeFile(const std::string &file,
                                     const PpmHeader &header,
                                     const std::vector<Color24> &pixels) {
   auto err = validate(file, header, pixels);
   if (ErrorCode::SUCCESS != err) {
-    std::cerr << "PpmFileWritter::validate() failed" << std::endl;
+    LOGERR("validate() failed");
     return err;
   }
 
   err = openStream(file);
   if (ErrorCode::SUCCESS != err) {
-    std::cerr << "PpmFileWritter::openStream() failed" << std::endl;
+    LOGERR("openStream() failed");
     return err;
   }
 
@@ -35,23 +35,21 @@ ErrorCode PpmFileWritter::validate(const std::string &file,
                                    const std::vector<Color24> &pixels) const {
   const auto idx = file.rfind(".ppm");
   if (std::string::npos == idx) {
-    std::cerr << "Error, file: [" << file << "] must end with .ppm extension"
-              << std::endl;
+    LOGERR("Error, file: [%s] must end with .ppm extension", file.c_str());
     return ErrorCode::FAILURE;
   }
 
   if (PpmVersion::P3 != header.version) {
-    std::cerr << "Error, received unsupported PpmVersion: "
-              << getEnumValue(header.version)
-              << ". Currently only P3 version is supported" << std::endl;
+    LOGERR("Error, received unsupported PpmVersion: %d. Currently only "
+           "P3 version is supported", getEnumValue(header.version));
     return ErrorCode::FAILURE;
   }
 
   const size_t expectedPixelsCtn = header.imageWidth * header.imageHeight;
   const size_t providedPixelsCtn = pixels.size();
   if (expectedPixelsCtn != providedPixelsCtn) {
-    std::cerr << "Error, expectedPixelsCtn/providedPixelsCtn mismatch. "
-              << expectedPixelsCtn << " vs " << providedPixelsCtn << std::endl;
+    LOGERR("Error, expectedPixelsCtn/providedPixelsCtn mismatch. %zu vs %zu",
+        expectedPixelsCtn, providedPixelsCtn);
     return ErrorCode::FAILURE;
   }
 
@@ -62,8 +60,7 @@ ErrorCode PpmFileWritter::openStream(const std::string &file) {
   //RAII dtor will close the stream when finished
   _fileStream.open(file.c_str(), std::ios::out | std::ios::binary);
   if (!_fileStream) {
-    std::cerr << "Error, file: [" << file << "] could not be created"
-              << std::endl;
+    LOGERR("Error, file: [%s] could not be created", file.c_str());
     return ErrorCode::FAILURE;
   }
 

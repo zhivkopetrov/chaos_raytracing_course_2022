@@ -2,10 +2,10 @@
 #include "shape/ShapeApplication.h"
 
 // System headers
-#include <iostream>
 
 // Other libraries headers
 #include "utils/time/Time.h"
+#include "utils/log/Log.h"
 
 // Own components headers
 #include "shape/helpers/BatmanTaskDispatcher.h"
@@ -18,14 +18,13 @@ ErrorCode ShapeApplication::run(const ShapeConfig &cfg) {
 
   const auto err = saveOutput(cfg.imageCfg, pixels);
   if (ErrorCode::SUCCESS != err) {
-    std::cerr << "ShapeApplication::saveOutput() failed" << std::endl;
+    LOGERR("ShapeApplication::saveOutput() failed");
     return ErrorCode::FAILURE;
   }
 
   const auto elapsedMs = time.getElapsed().toMilliseconds();
-  std::cout << "Successfully generated [" << imageCfg.name << " - "
-            << imageCfg.width << 'x' << imageCfg.height << "] in " << elapsedMs
-            << "ms\n";
+  LOGG("Successfully generated [%s - %dx%d] in %ld ms",
+       imageCfg.name.c_str(), imageCfg.width, imageCfg.height, elapsedMs);
 
   return ErrorCode::SUCCESS;
 }
@@ -37,7 +36,7 @@ ErrorCode ShapeApplication::saveOutput(const ImageConfig &cfg,
 
   const auto err = _writter.writeFile(cfg.name, header, pixels);
   if (ErrorCode::SUCCESS != err) {
-    std::cerr << "writter.writeFile() failed" << std::endl;
+    LOGERR("writter.writeFile() failed");
     return ErrorCode::FAILURE;
   }
 

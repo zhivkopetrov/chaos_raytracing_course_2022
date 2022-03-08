@@ -25,7 +25,6 @@ add_executable(
         ${_INC_DIR}/strategy/CrtSingleThread.h
         ${_INC_DIR}/strategy/CrtMultipleProducers.h
         ${_INC_DIR}/strategy/config/StrategyConfig.h
-        
      
         ${_SRC_DIR}/main.cpp
         ${_SRC_DIR}/CrtApplication.cpp

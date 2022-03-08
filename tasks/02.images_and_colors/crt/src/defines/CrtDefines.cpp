@@ -2,9 +2,9 @@
 #include "crt/defines/CrtDefines.h"
 
 // System headers
-#include <iostream>
 
 // Other libraries headers
+#include "utils/log/Log.h"
 
 // Own components headers
 
@@ -19,8 +19,7 @@ CrtStrategy parseStrategy(const std::string &identifier) {
     return CrtStrategy::MULTIPLE_PRODUCERS_SINGLE_ASYNC_CONSUMER;
   }
 
-  std::cerr << "Error, received unsupported CrtStrategy identifier: "
-            << identifier << ". Falling back to CrtStrategy::SINGLE_THREAD"
-            << std::endl;
+  LOGERR("Error, received unsupported CrtStrategy identifier: %s. "
+         "Falling back to CrtStrategy::SINGLE_THREAD", identifier.c_str());
   return CrtStrategy::SINGLE_THREAD;
 }

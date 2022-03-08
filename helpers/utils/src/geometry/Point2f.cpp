@@ -8,8 +8,6 @@
 
 // Own components headers
 
-// Forward declarations
-
 Point2f::Point2f(float inputX, float inputY)
     : x(inputX), y(inputY) {
 }

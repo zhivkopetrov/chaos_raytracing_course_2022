@@ -2,10 +2,10 @@
 #include "crt/geometry/PixelRegion.h"
 
 // System headers
-#include <iostream>
 
 // Other libraries headers
 #include "utils/data_type/EnumClassUtils.h"
+#include "utils/log/Log.h"
 
 // Own components headers
 
@@ -65,9 +65,8 @@ std::vector<Color24> PixelRegion::produceRandomized(int32_t regionWidth,
     randomizeBlueComponent(generator, pixels);
     break;
   default:
-    std::cerr << "Error, received unsupported PixelRegionType: "
-              << getEnumValue(type)
-              << ". Returning result for PixelRegionType::RED" << std::endl;
+    LOGERR("Error, received unsupported PixelRegionType: %d. "
+           "Returning result for PixelRegionType::RED", getEnumValue(type));
     randomizeRedComponent(generator, pixels);
     break;
   }

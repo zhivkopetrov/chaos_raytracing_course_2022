@@ -1,9 +1,9 @@
 // System headers
 #include <cstdint>
 #include <cstdlib>
-#include <iostream>
 
 // Other libraries headers
+#include "utils/log/Log.h"
 
 // Own components headers
 #include "shape/config/ShapeConfigLoader.h"
@@ -15,7 +15,7 @@ int32_t main([[maybe_unused]]int32_t argc, [[maybe_unused]]char *args[]) {
   const auto cfg = ShapeConfigLoader::loadConfig();
   const auto err = app.run(cfg);
   if (ErrorCode::SUCCESS != err) {
-    std::cerr << "ShapeApplication::run() failed" << std::endl;
+    LOGERR("ShapeApplication::run() failed");
     return EXIT_FAILURE;
   }
 

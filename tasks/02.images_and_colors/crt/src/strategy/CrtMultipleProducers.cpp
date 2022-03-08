@@ -5,9 +5,9 @@
 #include <random>
 #include <array>
 #include <thread>
-#include <iostream>
 
 // Other libraries headers
+#include "utils/log/Log.h"
 
 // Own components headers
 #include "crt/geometry/PixelRegion.h"
@@ -83,10 +83,8 @@ CrtMultipleProducers::WorkloadConfig CrtMultipleProducers::computeWorkloadConfig
   const auto hardwareThreads =
       static_cast<int32_t>(std::thread::hardware_concurrency());
   if (0 == hardwareThreads) { //hint failed
-    std::cerr
-        << "CrtMultipleProducers::getAdditionalThreadCount: unable to "
-        "detect hardware threads. Falling back to single-threaded solution"
-        << std::endl;
+    LOGR("CrtMultipleProducers::getAdditionalThreadCount: unable to "
+         "detect hardware threads. Falling back to single-threaded solution");
     workloadCfg.additionalThreads = 0;
     workloadCfg.regionsPerThread = 0;
     return workloadCfg;
@@ -101,8 +99,8 @@ CrtMultipleProducers::WorkloadConfig CrtMultipleProducers::computeWorkloadConfig
     //leave work for main thread
     workloadCfg.additionalThreads = totalRegions - 1;
     workloadCfg.regionsPerThread = 1;
-    std::cout << "Truncating worker threads down to: " << maxAdditionalThreads
-              << " to achieve best performance\n";
+    LOGR("Truncating worker threads down to: %d to achieve best performance",
+         maxAdditionalThreads);
   } else {
     //leave work for main thread
     workloadCfg.additionalThreads = maxAdditionalThreads - 1;

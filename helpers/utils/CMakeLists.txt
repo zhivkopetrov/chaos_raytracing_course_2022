@@ -27,6 +27,7 @@ add_library(
         ${_INC_DIR}/rendering/color/Color24.h
         ${_INC_DIR}/rendering/color/Color32.h
         ${_INC_DIR}/time/Time.h
+        ${_INC_DIR}/log/Log.h
         ${_INC_DIR}/ErrorCode.h
         
         ${_SRC_DIR}/file/PpmFileWritter.cpp
@@ -34,6 +35,7 @@ add_library(
         ${_SRC_DIR}/rendering/color/Color24.cpp
         ${_SRC_DIR}/rendering/color/Color32.cpp
         ${_SRC_DIR}/time/Time.cpp
+        ${_SRC_DIR}/log/Log.cpp
 )
 
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
