@@ -51,8 +51,8 @@ function(enable_target_warnings target)
 endfunction()
 
 function(set_target_visibility target)
-    if(${CMAKE_BUILD_TYPE} MATCHES Release OR 
-       ${CMAKE_BUILD_TYPE} MATCHES MinSizeRel)
+    if((${CMAKE_BUILD_TYPE} MATCHES Release) OR 
+       (${CMAKE_BUILD_TYPE} MATCHES MinSizeRel))
         
         # Default to hidden visibility for symbols
         set_target_properties(

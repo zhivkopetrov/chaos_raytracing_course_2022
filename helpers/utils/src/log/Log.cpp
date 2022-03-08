@@ -2,6 +2,9 @@
 #include "utils/log/Log.h"
 
 // System headers
+#if defined _WIN32
+#include <windows.h>
+#endif
 
 // Other libraries headers
 
@@ -72,7 +75,7 @@ void setTerminalColor([[maybe_unused]]TerminalColor color) {
   }
 
 #elif defined _WIN32
-  auto colorIdx = 0;
+  WORD colorIdx = 0;
   switch (color) {
   case TerminalColor::NONE:
     colorIdx = COLOR_NONE;
@@ -96,7 +99,7 @@ void setTerminalColor([[maybe_unused]]TerminalColor color) {
     colorIdx = COLOR_CYAN;
     break;
   case TerminalColor::BOLD_RED:
-    colorIdx = BOLD_RED;
+    colorIdx = COLOR_RED_BOLD;
     break;
   default:
     printf("Error, received unsupported TerminalColor: %d\n",

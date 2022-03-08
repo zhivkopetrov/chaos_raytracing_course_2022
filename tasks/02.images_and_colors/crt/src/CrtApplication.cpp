@@ -29,7 +29,7 @@ ErrorCode CrtApplication::run(const CrtConfig &cfg) {
 
   const auto elapsedMs = time.getElapsed().toMilliseconds();
   const auto &imageCfg = cfg.imageCfg;
-  LOGG("Successfully generated [%s - %dx%d] in %ld ms",
+  LOGG("Successfully generated [%s - %dx%d] in %lld ms",
        imageCfg.name.c_str(), imageCfg.width, imageCfg.height, elapsedMs);
 
   return ErrorCode::SUCCESS;

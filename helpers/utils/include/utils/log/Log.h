@@ -26,16 +26,6 @@ void setTerminalColor(TerminalColor color);
 
 } //namespace LogInternal
 
-/* terminal colors */
-#define TERM_BOLD "\033[1m "
-#define TERM_RED "\033[31m"
-#define TERM_GREEN "\033[32m"
-#define TERM_YELLOW "\033[33m"
-#define TERM_BLUE "\033[34m"
-#define TERM_MAGENTA "\033[35m"
-#define TERM_CYAN "\033[36m"
-#define TERM_COLOR_NONE "\033[0m"
-
 #define LOGERR(format, ...)                                              \
   do {                                                                   \
 	  LogInternal::setTerminalColor(LogInternal::TerminalColor::BOLD_RED); \

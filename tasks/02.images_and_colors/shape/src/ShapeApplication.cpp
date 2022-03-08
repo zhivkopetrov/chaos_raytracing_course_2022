@@ -23,7 +23,7 @@ ErrorCode ShapeApplication::run(const ShapeConfig &cfg) {
   }
 
   const auto elapsedMs = time.getElapsed().toMilliseconds();
-  LOGG("Successfully generated [%s - %dx%d] in %ld ms",
+  LOGG("Successfully generated [%s - %dx%d] in %lld ms",
        imageCfg.name.c_str(), imageCfg.width, imageCfg.height, elapsedMs);
 
   return ErrorCode::SUCCESS;
