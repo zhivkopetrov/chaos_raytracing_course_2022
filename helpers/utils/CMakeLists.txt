@@ -23,6 +23,7 @@ add_library(
         ${_INC_DIR}/data_type/EnumClassUtils.h
         ${_INC_DIR}/data_type/FloatingPoint.h
         ${_INC_DIR}/file/PpmFileWritter.h
+        ${_INC_DIR}/file/IniFileParser.h
         ${_INC_DIR}/geometry/Point2f.h
         ${_INC_DIR}/rendering/color/Color24.h
         ${_INC_DIR}/rendering/color/Color32.h
@@ -31,6 +32,7 @@ add_library(
         ${_INC_DIR}/ErrorCode.h
         
         ${_SRC_DIR}/file/PpmFileWritter.cpp
+        ${_SRC_DIR}/file/IniFileParser.cpp
         ${_SRC_DIR}/geometry/Point2f.cpp
         ${_SRC_DIR}/rendering/color/Color24.cpp
         ${_SRC_DIR}/rendering/color/Color32.cpp

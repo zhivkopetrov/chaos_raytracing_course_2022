@@ -2,8 +2,6 @@
 #include "utils/file/PpmFileWritter.h"
 
 // System headers
-#include <cerrno>
-#include <cstring>
 
 // Other libraries headers
 
