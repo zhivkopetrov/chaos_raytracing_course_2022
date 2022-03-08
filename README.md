@@ -36,7 +36,6 @@ Results:
 Can be found in 'results' folder in the project root directory
 
 General TODOs:
-- Improve logging
 - Read configs from a file
 
 Task TODOs:
