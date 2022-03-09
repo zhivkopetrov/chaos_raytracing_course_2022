@@ -9,11 +9,16 @@
 #include "crt/config/CrtConfigLoader.h"
 #include "crt/CrtApplication.h"
 
-
 int32_t main([[maybe_unused]]int32_t argc, [[maybe_unused]]char *args[]) {
+  CrtConfig cfg;
+  auto err = CrtConfigLoader::loadConfig(cfg);
+  if (ErrorCode::SUCCESS != err) {
+    LOGERR("CrtConfigLoader::loadConfig() failed");
+    return EXIT_FAILURE;
+  }
+
   CrtApplication app;
-  const auto cfg = CrtConfigLoader::loadConfig();
-  const auto err = app.run(cfg);
+  err = app.run(cfg);
   if (ErrorCode::SUCCESS != err) {
     LOGERR("CrtConfig::run() failed");
     return EXIT_FAILURE;

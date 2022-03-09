@@ -5,6 +5,7 @@
 #include <cstdint>
 
 // Other libraries headers
+#include "utils/ErrorCode.h"
 
 // Own components headers
 #include "crt/config/CrtConfig.h"
@@ -15,7 +16,7 @@ class CrtConfigLoader {
 public:
   CrtConfigLoader() = delete;
 
-  static CrtConfig loadConfig();
+  static ErrorCode loadConfig(CrtConfig& outCfg);
 };
 
 #endif /* CRT_CRTCONFIGLOADER_H_ */
