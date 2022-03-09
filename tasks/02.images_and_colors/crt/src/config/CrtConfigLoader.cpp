@@ -99,7 +99,7 @@ ErrorCode populateStrategySection(const IniFileData &data,
 
   return ErrorCode::SUCCESS;
 }
-} //end anonymous namesppace
+} //end anonymous namespace
 
 ErrorCode CrtConfigLoader::loadConfig(CrtConfig &outCfg) {
   std::string filePath = PROJECT_ROOT_DIR;

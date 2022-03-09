@@ -51,6 +51,28 @@ std::string_view trim(const std::string &line) {
 
   return std::string_view(line.c_str() + startIdx, endIdx - startIdx + 1);
 }
+
+bool parseValueInt(const std::string &keyStr, int32_t &outValue) {
+  try {
+    outValue = std::stoi(keyStr);
+  } catch (const std::exception &e) {
+    LOGERR("%s", e.what());
+    return false;
+  }
+
+  return true;
+}
+
+bool parseValueFloat(const std::string &keyStr, float &outValue) {
+  try {
+    outValue = std::stof(keyStr);
+  } catch (const std::exception &e) {
+    LOGERR("%s", e.what());
+    return false;
+  }
+
+  return true;
+}
 } //end anonymous namespace
 
 ErrorCode IniFileParser::parseFile(std::string_view file,
@@ -117,18 +139,6 @@ ErrorCode IniFileParser::parseFile(std::string_view file,
   return ErrorCode::SUCCESS;
 }
 
-bool IniFileParser::parseValueInt(const std::string &keyStr,
-                                  int32_t &outValue) {
-  try {
-    outValue = std::stoi(keyStr);
-  } catch (const std::exception &e) {
-    LOGERR("%s", e.what());
-    return false;
-  }
-
-  return true;
-}
-
 bool IniFileParser::getKeyValueInt(const IniFileSection &section,
                                    const std::string &identifier,
                                    int32_t &outValue) {
@@ -139,6 +149,18 @@ bool IniFileParser::getKeyValueInt(const IniFileSection &section,
   }
 
   return parseValueInt(it->second, outValue);
+}
+
+bool IniFileParser::getKeyValueFloat(const IniFileSection &section,
+                                     const std::string &identifier,
+                                     float &outValue) {
+  auto it = section.find(identifier);
+  if (it == section.end()) {
+    LOGERR("Error, key: '%s' not found", identifier.c_str());
+    return false;
+  }
+
+  return parseValueFloat(it->second, outValue);
 }
 
 bool IniFileParser::getKeyValueString(const IniFileSection &section,

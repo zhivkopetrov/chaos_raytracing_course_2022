@@ -13,7 +13,7 @@
 struct BatmanShapeConfig {
   Point2f origin;
   Point2f ovalRadius;
-  double scale{};
+  float scale{};
 };
 
 #endif /* SHAPE_BATMANSHAPECONFIG_H_ */

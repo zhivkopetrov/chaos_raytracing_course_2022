@@ -11,9 +11,15 @@
 
 
 int32_t main([[maybe_unused]]int32_t argc, [[maybe_unused]]char *args[]) {
+  ShapeConfig cfg;
+  auto err = ShapeConfigLoader::loadConfig(cfg);
+  if (ErrorCode::SUCCESS != err) {
+    LOGERR("ShapeConfigLoader::loadConfig() failed");
+    return EXIT_FAILURE;
+  }
+
   ShapeApplication app;
-  const auto cfg = ShapeConfigLoader::loadConfig();
-  const auto err = app.run(cfg);
+  err = app.run(cfg);
   if (ErrorCode::SUCCESS != err) {
     LOGERR("ShapeApplication::run() failed");
     return EXIT_FAILURE;

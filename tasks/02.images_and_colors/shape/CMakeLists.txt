@@ -47,4 +47,10 @@ enable_target_warnings(${PROJECT_NAME})
 set_target_visibility(${PROJECT_NAME})
 #enable_target_sanitizer(${PROJECT_NAME} "address")
 
+target_compile_definitions(
+    ${PROJECT_NAME}
+    PRIVATE
+    -DPROJECT_ROOT_DIR="${CMAKE_CURRENT_SOURCE_DIR}"
+)
+
     

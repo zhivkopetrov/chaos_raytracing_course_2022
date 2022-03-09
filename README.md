@@ -35,9 +35,6 @@ Running executables:
 Results:
 Can be found in 'results' folder in the project root directory
 
-General TODOs:
-- Read configs from a file
-
 Task TODOs:
 1) crt
 - Implment MULTIPLE_PRODUCERS_SINGLE_ASYNC_CONSUMER strategy

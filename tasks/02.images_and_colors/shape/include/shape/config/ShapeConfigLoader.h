@@ -5,6 +5,7 @@
 #include <cstdint>
 
 // Other libraries headers
+#include "utils/ErrorCode.h"
 
 // Own components headers
 #include "shape/config/ShapeConfig.h"
@@ -15,7 +16,7 @@ class ShapeConfigLoader {
 public:
   ShapeConfigLoader() = delete;
 
-  static ShapeConfig loadConfig();
+  static ErrorCode loadConfig(ShapeConfig& outCfg);
 };
 
 #endif /* SHAPE_SHAPECONFIGLOADER_H_ */
