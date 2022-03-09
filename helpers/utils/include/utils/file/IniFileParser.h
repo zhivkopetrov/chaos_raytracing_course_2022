@@ -23,7 +23,19 @@ class IniFileParser {
 public:
   IniFileParser() = delete;
 
-  ErrorCode parseFile(std::string_view file, IniFileData& outData);
+  static ErrorCode parseFile(std::string_view file, IniFileData &outData);
+
+  static bool parseValueInt(const std::string &keyStr, int32_t &outValue);
+
+  static bool getKeyValueInt(const IniFileSection &section,
+                             const std::string &identifier, int32_t &outValue);
+
+  static bool getKeyValueString(const IniFileSection &section,
+                                const std::string &identifier,
+                                std::string &outValue);
+
+  //for debug purposes
+  static void print(const IniFileData &data);
 };
 
 #endif /* UTILS_INIFILEPARSER_H_ */

@@ -2,6 +2,7 @@
 #include "utils/file/IniFileParser.h"
 
 // System headers
+#include <sstream>
 #include <fstream>
 
 // Other libraries headers
@@ -62,9 +63,9 @@ ErrorCode IniFileParser::parseFile(std::string_view file,
   }
 
   std::string rawLine;
-  int32_t lineNumber = 0;
+  std::string currSectionName;
   IniFileSection currSection;
-  std::string_view currSectionName;
+  int32_t lineNumber = 0;
   while (!fileStream.eof()) {
     ++lineNumber;
     getline(fileStream, rawLine);
@@ -91,10 +92,10 @@ ErrorCode IniFileParser::parseFile(std::string_view file,
       const auto sectionName = line.substr(1, closeIdx - 1);
       // finish previous section
       if (!currSectionName.empty()) {
-        outData[std::string(currSectionName)] = std::move(currSection);
+        outData[currSectionName] = std::move(currSection);
         currSection.clear();
-        currSectionName = sectionName;
       }
+      currSectionName = sectionName;
       continue;
     }
 
@@ -106,11 +107,62 @@ ErrorCode IniFileParser::parseFile(std::string_view file,
     }
 
     currSection.insert(
-        std::make_pair(line.substr(0, eqIdx), line.substr(eqIdx + 1)));
+        std::make_pair(std::string(line.substr(0, eqIdx - 1)),
+            std::string(line.substr(eqIdx + 2))));
   }
 
   if (!currSectionName.empty()) {
-    outData[std::string(currSectionName)] = std::move(currSection);
+    outData[currSectionName] = std::move(currSection);
   }
   return ErrorCode::SUCCESS;
 }
+
+bool IniFileParser::parseValueInt(const std::string &keyStr,
+                                  int32_t &outValue) {
+  try {
+    outValue = std::stoi(keyStr);
+  } catch (const std::exception &e) {
+    LOGERR("%s", e.what());
+    return false;
+  }
+
+  return true;
+}
+
+bool IniFileParser::getKeyValueInt(const IniFileSection &section,
+                                   const std::string &identifier,
+                                   int32_t &outValue) {
+  auto it = section.find(identifier);
+  if (it == section.end()) {
+    LOGERR("Error, key: '%s' not found", identifier.c_str());
+    return false;
+  }
+
+  return parseValueInt(it->second, outValue);
+}
+
+bool IniFileParser::getKeyValueString(const IniFileSection &section,
+                                      const std::string &identifier,
+                                      std::string &outValue) {
+  auto it = section.find(identifier);
+  if (it == section.end()) {
+    LOGERR("Error, key: '%s' not found", identifier.c_str());
+    return false;
+  }
+
+  outValue = it->second;
+  return true;
+}
+
+void IniFileParser::print(const IniFileData &data) {
+  std::ostringstream ostr;
+  for (const auto& [sectionKey, sectionData] : data) {
+    ostr << '[' << sectionKey << "]\n";
+    for (const auto& [key, value] : sectionData) {
+      ostr << key << " = " << value << '\n';
+    }
+    ostr << '\n';
+  }
+  LOG_ON_SAME_LINE("%s", ostr.str().c_str());
+}
+
