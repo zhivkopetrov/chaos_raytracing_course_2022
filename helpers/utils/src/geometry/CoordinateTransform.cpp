@@ -2,7 +2,6 @@
 #include "utils/geometry/CoordinateTransform.h"
 
 // System headers
-#include <cassert>
 
 // Other libraries headers
 
@@ -64,7 +63,6 @@ std::vector<Vec3f> CoordinateTransform::getWorldDirVectors(
 
   const auto ndc = rasterToNdc(raster, imageWidth, imageHeight);
   const auto screen = ndcToScreen(ndc);
-  assert(dirs.size() == screen.size());
   const auto aspectRatio = static_cast<float>(imageWidth)
       / static_cast<float>(imageHeight);
 
