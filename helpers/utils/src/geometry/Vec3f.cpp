@@ -83,9 +83,14 @@ void Vec3f::normalize() {
   *this /= length();
 }
 
-void Vec3f::writeInt32DataToStream(std::ostream &out) const {
+void Vec3f::writeInt32SpacedData(std::ostream &out) const {
   out << static_cast<int32_t>(_x) << ' ' << static_cast<int32_t>(_y) << ' '
       << static_cast<int32_t>(_z);
+}
+
+void Vec3f::writeCharData(std::ostream &out) const {
+  out << static_cast<char>(_x) << static_cast<char>(_y)
+      << static_cast<char>(_z);
 }
 
 Vec3f operator+(const Vec3f &left, const Vec3f &right) {

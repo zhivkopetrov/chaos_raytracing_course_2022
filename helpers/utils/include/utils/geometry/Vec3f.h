@@ -34,7 +34,8 @@ public:
 
   void normalize();
 
-  void writeInt32DataToStream(std::ostream &out) const;
+  void writeInt32SpacedData(std::ostream &out) const;
+  void writeCharData(std::ostream &out) const;
 
   //helper methods
   friend Vec3f operator+(const Vec3f &left, const Vec3f &right);

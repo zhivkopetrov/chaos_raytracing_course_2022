@@ -36,7 +36,11 @@ private:
 
   ErrorCode openStream(const std::string &file);
 
-  void doWrite(const PpmHeader &header, const std::vector<Color24> &pixels);
+  void doWriteP3Format(const PpmHeader &header,
+                       const std::vector<Color24> &pixels);
+
+  void doWriteP6Format(const PpmHeader &header,
+                       const std::vector<Color24> &pixels);
 
   std::ofstream _fileStream;
 };

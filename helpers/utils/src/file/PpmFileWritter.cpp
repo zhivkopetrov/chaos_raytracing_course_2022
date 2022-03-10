@@ -24,7 +24,12 @@ ErrorCode PpmFileWritter::writeFile(const std::string &file,
     return err;
   }
 
-  doWrite(header, pixels);
+  if (PpmVersion::P3 == header.version) {
+    doWriteP3Format(header, pixels);
+  } else {
+    doWriteP6Format(header, pixels);
+  }
+
   return ErrorCode::SUCCESS;
 }
 
@@ -37,14 +42,15 @@ ErrorCode PpmFileWritter::validate(const std::string &file,
     return ErrorCode::FAILURE;
   }
 
-  if (PpmVersion::P3 != header.version) {
+  if ((PpmVersion::P3 != header.version) &&
+      (PpmVersion::P6 != header.version)) {
     LOGERR("Error, received unsupported PpmVersion: %d. Currently only "
-           "P3 version is supported",
-        getEnumValue(header.version));
+           "P3 and P6 versions are supported", getEnumValue(header.version));
     return ErrorCode::FAILURE;
   }
 
-  const size_t expectedPixelsCtn = header.imageWidth * header.imageHeight;
+  const size_t expectedPixelsCtn =
+      static_cast<size_t>(header.imageWidth) * header.imageHeight;
   const size_t providedPixelsCtn = pixels.size();
   if (expectedPixelsCtn != providedPixelsCtn) {
     LOGERR("Error, expectedPixelsCtn/providedPixelsCtn mismatch. %zu vs %zu",
@@ -66,9 +72,8 @@ ErrorCode PpmFileWritter::openStream(const std::string &file) {
   return ErrorCode::SUCCESS;
 }
 
-void PpmFileWritter::doWrite(const PpmHeader &header,
-                             const std::vector<Color24> &pixels) {
-  _fileStream << std::nounitbuf; //don't flush after insertion
+void PpmFileWritter::doWriteP3Format(const PpmHeader &header,
+                                     const std::vector<Color24> &pixels) {
 
   _fileStream << "P3\n" << header.imageWidth << ' ' << header.imageHeight
               << '\n' << header.maxColorComponent << '\n';
@@ -76,11 +81,26 @@ void PpmFileWritter::doWrite(const PpmHeader &header,
   int32_t pixelId = 0;
   for (int32_t row = 0; row < header.imageHeight; ++row) {
     for (int32_t col = 0; col < header.imageWidth; ++col) {
-      pixels[pixelId].writeInt32DataToStream(_fileStream);
+      pixels[pixelId].writeInt32SpacedData(_fileStream);
       _fileStream << '\t';
       ++pixelId;
     }
     _fileStream << '\n';
+  }
+}
+
+void PpmFileWritter::doWriteP6Format(const PpmHeader &header,
+                                     const std::vector<Color24> &pixels) {
+
+  _fileStream << "P6\n" << header.imageWidth << ' ' << header.imageHeight
+              << '\n' << header.maxColorComponent << '\n';
+
+  int32_t pixelId = 0;
+  for (int32_t row = 0; row < header.imageHeight; ++row) {
+    for (int32_t col = 0; col < header.imageWidth; ++col) {
+      pixels[pixelId].writeCharData(_fileStream);
+      ++pixelId;
+    }
   }
 }
 

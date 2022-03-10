@@ -31,7 +31,7 @@ ErrorCode ShapeApplication::run(const ShapeConfig &cfg) {
 
 ErrorCode ShapeApplication::saveOutput(const ImageConfig &cfg,
                                        const std::vector<Color24> &pixels) {
-  const PpmHeader header = { .version = PpmVersion::P3, .imageWidth = cfg.width,
+  const PpmHeader header = { .version = PpmVersion::P6, .imageWidth = cfg.width,
       .imageHeight = cfg.height, .maxColorComponent = 255 };
 
   const auto err = _writter.writeFile(cfg.name, header, pixels);
