@@ -5,7 +5,7 @@
 #include <random>
 
 // Other libraries headers
-#include "utils/rendering/color/Color24.h"
+#include "utils/geometry/Vec3f.h"
 
 // Own components headers
 #include "crt/defines/CrtDefines.h"

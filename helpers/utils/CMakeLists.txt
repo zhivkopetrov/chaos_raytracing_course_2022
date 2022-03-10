@@ -25,8 +25,9 @@ add_library(
         ${_INC_DIR}/file/PpmFileWritter.h
         ${_INC_DIR}/file/IniFileParser.h
         ${_INC_DIR}/geometry/Point2f.h
-        ${_INC_DIR}/rendering/color/Color24.h
-        ${_INC_DIR}/rendering/color/Color32.h
+        ${_INC_DIR}/geometry/Vec3f.h
+        ${_INC_DIR}/geometry/Ray.h
+        ${_INC_DIR}/geometry/CoordinateTransform.h
         ${_INC_DIR}/time/Time.h
         ${_INC_DIR}/log/Log.h
         ${_INC_DIR}/ErrorCode.h
@@ -34,8 +35,9 @@ add_library(
         ${_SRC_DIR}/file/PpmFileWritter.cpp
         ${_SRC_DIR}/file/IniFileParser.cpp
         ${_SRC_DIR}/geometry/Point2f.cpp
-        ${_SRC_DIR}/rendering/color/Color24.cpp
-        ${_SRC_DIR}/rendering/color/Color32.cpp
+        ${_SRC_DIR}/geometry/Vec3f.cpp
+        ${_SRC_DIR}/geometry/Ray.cpp
+        ${_SRC_DIR}/geometry/CoordinateTransform.cpp
         ${_SRC_DIR}/time/Time.cpp
         ${_SRC_DIR}/log/Log.cpp
 )

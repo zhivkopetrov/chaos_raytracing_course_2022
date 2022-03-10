@@ -6,7 +6,7 @@
 
 // Other libraries headers
 #include "utils/geometry/Point2f.h"
-#include "utils/rendering/color/Color24.h"
+#include "utils/geometry/Vec3f.h"
 
 // Own components headers
 #include "shape/geometry/config/BatmanShapeConfig.h"

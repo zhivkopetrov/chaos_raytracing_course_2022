@@ -1,8 +1,7 @@
 // Corresponding header
-#include "shape/config/ShapeConfigLoader.h"
+#include "rays/config/RaysConfigLoader.h"
 
 // System headers
-#include <array>
 
 // Other libraries headers
 #include "utils/file/IniFileParser.h"
@@ -18,13 +17,6 @@ constexpr auto IMAGE_SECTION_NAME = "image";
 constexpr auto IMAGE_NAME = "name";
 constexpr auto IMAGE_WIDTH = "width";
 constexpr auto IMAGE_HEIGHT = "height";
-
-constexpr auto GEOMETRY_SECTION_NAME = "geometry";
-constexpr auto GEOMETRY_ORIGIN_X = "origin_x";
-constexpr auto GEOMETRY_ORIGIN_Y = "origin_y";
-constexpr auto GEOMETRY_SHAPE_SCALE = "shape_scale";
-constexpr auto GEOMETRY_OVAL_RADIUS_X = "ovar_radius_x";
-constexpr auto GEOMETRY_OVAL_RADIUS_Y = "ovar_radius_y";
 
 ErrorCode populateImageSection(const IniFileData &data, ImageConfig &outCfg) {
   auto it = data.find(IMAGE_SECTION_NAME);
@@ -50,36 +42,9 @@ ErrorCode populateImageSection(const IniFileData &data, ImageConfig &outCfg) {
 
   return ErrorCode::SUCCESS;
 }
-
-ErrorCode populateGeometrySection(const IniFileData &data,
-                                  BatmanShapeConfig &outCfg) {
-  auto it = data.find(GEOMETRY_SECTION_NAME);
-  if (it == data.end()) {
-    LOGERR("Error, section name: '%s' not found in '%s'", GEOMETRY_SECTION_NAME,
-        CONFIG_FILE_NAME);
-    return ErrorCode::FAILURE;
-  }
-  const auto &section = it->second;
-
-  constexpr auto valuesCount = 5;
-  constexpr std::array<const char*, valuesCount> valueNames { GEOMETRY_ORIGIN_X,
-      GEOMETRY_ORIGIN_Y, GEOMETRY_SHAPE_SCALE, GEOMETRY_OVAL_RADIUS_X,
-      GEOMETRY_OVAL_RADIUS_Y };
-  std::array<float*, valuesCount> values { &outCfg.origin.x, &outCfg.origin.y,
-      &outCfg.scale, &outCfg.ovalRadius.x, &outCfg.ovalRadius.y };
-
-  for (auto i = 0; i < valuesCount; ++i) {
-    const bool success = IniFileParser::getKeyValueFloat(section, valueNames[i],
-        *values[i]);
-    if (!success)
-      return ErrorCode::FAILURE;
-  }
-
-  return ErrorCode::SUCCESS;
-}
 } //end anonymous namespace
 
-ErrorCode ShapeConfigLoader::loadConfig(ShapeConfig &outCfg) {
+ErrorCode RaysConfigLoader::loadConfig(RaysConfig &outCfg) {
   std::string filePath = PROJECT_ROOT_DIR;
   filePath.append("/").append(CONFIG_FILE_NAME);
   IniFileData fileData;
@@ -92,12 +57,6 @@ ErrorCode ShapeConfigLoader::loadConfig(ShapeConfig &outCfg) {
   err = populateImageSection(fileData, outCfg.imageCfg);
   if (ErrorCode::SUCCESS != err) {
     LOGERR("Error, populateImageSection() failed");
-    return ErrorCode::FAILURE;
-  }
-
-  err = populateGeometrySection(fileData, outCfg.batmanShapeCfg);
-  if (ErrorCode::SUCCESS != err) {
-    LOGERR("Error, populateGeometrySection() failed");
     return ErrorCode::FAILURE;
   }
 

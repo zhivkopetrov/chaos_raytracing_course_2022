@@ -38,8 +38,9 @@ ErrorCode PpmFileWritter::validate(const std::string &file,
   }
 
   if (PpmVersion::P3 != header.version) {
-    LOGERR("Error, received unsupported PpmVersion: %d. Currently only "
-           "P3 version is supported", getEnumValue(header.version));
+    LOGERR(
+        "Error, received unsupported PpmVersion: %d. Currently only " "P3 version is supported",
+        getEnumValue(header.version));
     return ErrorCode::FAILURE;
   }
 
@@ -67,13 +68,16 @@ ErrorCode PpmFileWritter::openStream(const std::string &file) {
 
 void PpmFileWritter::doWrite(const PpmHeader &header,
                              const std::vector<Color24> &pixels) {
+  _fileStream << std::nounitbuf; //don't flush after insertion
+
   _fileStream << "P3\n" << header.imageWidth << ' ' << header.imageHeight
               << '\n' << header.maxColorComponent << '\n';
 
   int32_t pixelId = 0;
   for (int32_t row = 0; row < header.imageHeight; ++row) {
     for (int32_t col = 0; col < header.imageWidth; ++col) {
-      _fileStream << pixels[pixelId];
+      pixels[pixelId].writeInt32DataToStream(_fileStream);
+      _fileStream << '\t';
       ++pixelId;
     }
     _fileStream << '\n';

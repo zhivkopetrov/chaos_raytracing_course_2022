@@ -13,25 +13,25 @@ namespace {
 
 void randomizeRedComponent(std::mt19937 &generator,
                            std::vector<Color24> &outPixels) {
-  std::uniform_int_distribution<> distr(0, 255);
+  std::uniform_real_distribution<float> distr(0.0f, 255.0f);
   for (auto &pixel : outPixels) {
-    pixel.rgb.r = static_cast<uint8_t>(distr(generator));
+    pixel.setX(distr(generator));
   }
 }
 
 void randomizeGreenComponent(std::mt19937 &generator,
                              std::vector<Color24> &outPixels) {
-  std::uniform_int_distribution<> distr(0, 255);
+  std::uniform_real_distribution<float> distr(0.0f, 255.0f);
   for (auto &pixel : outPixels) {
-    pixel.rgb.g = static_cast<uint8_t>(distr(generator));
+    pixel.setY(distr(generator));
   }
 }
 
 void randomizeBlueComponent(std::mt19937 &generator,
                             std::vector<Color24> &outPixels) {
-  std::uniform_int_distribution<> distr(0, 255);
+  std::uniform_real_distribution<float> distr(0.0f, 255.0f);
   for (auto &pixel : outPixels) {
-    pixel.rgb.b = static_cast<uint8_t>(distr(generator));
+    pixel.setZ(distr(generator));
   }
 }
 

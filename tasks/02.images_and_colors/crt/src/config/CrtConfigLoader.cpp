@@ -105,15 +105,29 @@ ErrorCode CrtConfigLoader::loadConfig(CrtConfig &outCfg) {
   std::string filePath = PROJECT_ROOT_DIR;
   filePath.append("/").append(CONFIG_FILE_NAME);
   IniFileData fileData;
-  const auto err = IniFileParser::parseFile(filePath, fileData);
+  auto err = IniFileParser::parseFile(filePath, fileData);
   if (ErrorCode::SUCCESS != err) {
     LOGERR("IniFileParser::parseFile() failed");
     return ErrorCode::FAILURE;
   }
 
-  populateImageSection(fileData, outCfg.imageCfg);
-  populatePexielRegionSection(fileData, outCfg.pixelRegionCfg);
-  populateStrategySection(fileData, outCfg.strategyCfg);
+  err = populateImageSection(fileData, outCfg.imageCfg);
+  if (ErrorCode::SUCCESS != err) {
+    LOGERR("Error, populateImageSection() failed");
+    return ErrorCode::FAILURE;
+  }
+
+  err = populatePexielRegionSection(fileData, outCfg.pixelRegionCfg);
+  if (ErrorCode::SUCCESS != err) {
+    LOGERR("Error, populatePexielRegionSection() failed");
+    return ErrorCode::FAILURE;
+  }
+
+  err = populateStrategySection(fileData, outCfg.strategyCfg);
+  if (ErrorCode::SUCCESS != err) {
+    LOGERR("Error, populatePexielRegionSection() failed");
+    return ErrorCode::FAILURE;
+  }
 
   return ErrorCode::SUCCESS;
 }
