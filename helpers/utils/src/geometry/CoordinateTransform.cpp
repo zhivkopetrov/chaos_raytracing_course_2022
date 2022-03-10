@@ -15,10 +15,10 @@ std::vector<Point2f> CoordinateTransform::getMidPixelRaster(
   constexpr auto offset = 0.5f;
   int32_t idx = 0;
   for (int32_t row = 0; row < imageHeight; ++row) {
-    const auto xValue = static_cast<float>(row) + offset;
+    const auto yValue = static_cast<float>(row) + offset;
     for (int32_t col = 0; col < imageWidth; ++col) {
-      coords[idx].x = xValue;
-      coords[idx].y = static_cast<float>(col) + offset;
+      coords[idx].y = yValue;
+      coords[idx].x = static_cast<float>(col) + offset;
       ++idx;
     }
   }
@@ -36,20 +36,20 @@ std::vector<Point2f> CoordinateTransform::rasterToNdc(
   const auto height = static_cast<float>(imageHeight);
 
   for (size_t i = 0; i < size; ++i) {
-    ndc[i].x = width * raster[i].x;
-    ndc[i].y = height * raster[i].y;
+    ndc[i].x = raster[i].x / width;
+    ndc[i].y = raster[i].y / height;
   }
 
   return ndc;
 }
 
 std::vector<Point2f> CoordinateTransform::ndcToScreen(
-    const std::vector<Point2f> &ndc, float aspectRatio) {
+    const std::vector<Point2f> &ndc) {
   const auto size = ndc.size();
   std::vector<Point2f> screen(size);
 
   for (size_t i = 0; i < size; ++i) {
-    screen[i].x = ( (2.0f * ndc[i].x) - 1.0f) * aspectRatio;
+    screen[i].x = ( (2.0f * ndc[i].x) - 1.0f);
     screen[i].y = 1.0f - (2.0f * ndc[i].y);
   }
 
@@ -59,22 +59,21 @@ std::vector<Point2f> CoordinateTransform::ndcToScreen(
 std::vector<Vec3f> CoordinateTransform::getWorldDirVectors(
     const std::vector<Point2f> &raster, float zDistance, int32_t imageWidth,
     int32_t imageHeight, bool normalize) {
-  const auto size = raster.size();
   std::vector<Vec3f> dirs;
-  dirs.reserve(size);
+  dirs.reserve(raster.size());
 
+  const auto ndc = rasterToNdc(raster, imageWidth, imageHeight);
+  const auto screen = ndcToScreen(ndc);
+  assert(dirs.size() == screen.size());
   const auto aspectRatio = static_cast<float>(imageWidth)
       / static_cast<float>(imageHeight);
-  const auto ndc = rasterToNdc(raster, imageWidth, imageHeight);
-  const auto screen = ndcToScreen(ndc, aspectRatio);
 
-  assert(size == screen.size());
-  for (size_t i = 0; i < size; ++i) {
-    dirs.emplace_back(screen[i].x, screen[i].y, zDistance);
+  for (const auto &screenPixel : screen) {
+    dirs.emplace_back(screenPixel.x * aspectRatio, screenPixel.y, zDistance);
   }
 
   if (normalize) {
-    for (auto& dir : dirs) {
+    for (auto &dir : dirs) {
       dir.normalize();
     }
   }

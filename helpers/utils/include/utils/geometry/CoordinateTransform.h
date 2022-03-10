@@ -23,8 +23,7 @@ public:
                                           int32_t imageWidth,
                                           int32_t imageHeight);
 
-  static std::vector<Point2f> ndcToScreen(const std::vector<Point2f> &ndc,
-                                          float aspectRatio);
+  static std::vector<Point2f> ndcToScreen(const std::vector<Point2f> &ndc);
 
   static std::vector<Vec3f> getWorldDirVectors(
       const std::vector<Point2f> &raster, float zDistance, int32_t imageWidth,

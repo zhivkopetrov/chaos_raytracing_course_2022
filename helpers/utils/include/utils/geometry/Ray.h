@@ -13,10 +13,11 @@
 class Ray {
 public:
   Ray() = default;
-  Ray(const Point3f &origin, const Point3f &direction);
+  Ray(const Point3f &origin, const Vec3f &direction);
 
   Point3f origin() const;
   Vec3f direction() const;
+  Color24 color24() const;
 
 private:
   Point3f _orig;

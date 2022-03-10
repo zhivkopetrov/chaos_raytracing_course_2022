@@ -6,19 +6,27 @@
 
 // Other libraries headers
 #include "utils/geometry/Vec3f.h"
+#include "utils/geometry/Ray.h"
 
 // Own components headers
 
 // Forward declarations
 
+struct RaysSceneConfig {
+  Point3f origin;
+  float distanceFromCamera{};
+  int32_t imageWidth{};
+  int32_t imageHeight{};
+};
+
 class RaysScene {
 public:
-  void compose(const Point3f &origin, float distanceFromCamera);
-//  std::vector<Vec3f>
+  void compose(const RaysSceneConfig &cfg);
+  std::vector<Color24> produceSceneGradient() const;
 
 private:
-  Point3f _origin;
-  std::vector<Vec3f> _worldDirVectors;
+  RaysSceneConfig _cfg;
+  std::vector<Ray> _sceneRays;
 };
 
 #endif /* RAYS_RAYSSCENE_H_ */

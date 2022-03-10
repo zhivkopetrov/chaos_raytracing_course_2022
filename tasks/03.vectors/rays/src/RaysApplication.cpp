@@ -12,7 +12,13 @@
 ErrorCode RaysApplication::run(const RaysConfig &cfg) {
   Time time;
 
-  const auto err = saveOutput(cfg.imageCfg, {});
+  const RaysSceneConfig sceneCfg = { .origin = Point3f(0, 0, 0),
+      .distanceFromCamera = -1.0f, .imageWidth = cfg.imageCfg.width,
+      .imageHeight = cfg.imageCfg.height };
+  _scene.compose(sceneCfg);
+  const auto pixels = _scene.produceSceneGradient();
+
+  const auto err = saveOutput(cfg.imageCfg, pixels);
   if (ErrorCode::SUCCESS != err) {
     LOGERR("CrtApplication::saveOutput() failed");
     return ErrorCode::FAILURE;

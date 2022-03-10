@@ -38,8 +38,8 @@ ErrorCode PpmFileWritter::validate(const std::string &file,
   }
 
   if (PpmVersion::P3 != header.version) {
-    LOGERR(
-        "Error, received unsupported PpmVersion: %d. Currently only " "P3 version is supported",
+    LOGERR("Error, received unsupported PpmVersion: %d. Currently only "
+           "P3 version is supported",
         getEnumValue(header.version));
     return ErrorCode::FAILURE;
   }

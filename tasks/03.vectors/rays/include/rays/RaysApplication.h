@@ -9,6 +9,7 @@
 
 // Own components headers
 #include "rays/config/RaysConfig.h"
+#include "rays/scene/RaysScene.h"
 
 // Forward declarations
 
@@ -20,6 +21,7 @@ private:
   ErrorCode saveOutput(const ImageConfig &cfg,
                        const std::vector<Color24> &pixels);
 
+  RaysScene _scene;
   PpmFileWritter _writter;
 };
 

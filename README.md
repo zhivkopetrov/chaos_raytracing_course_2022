@@ -28,9 +28,15 @@ cmake --build . -j
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"
 cmake --build . -j
 
-Running executables:
+Running executables on Linux:
 ./tasks/02.images_and_colors/shape/shape
 ./tasks/02.images_and_colors/crt/crt
+./tasks/03.vectors/rays/rays
+
+Running executables on Windows:
+tasks/02.images_and_colors/shape/Debug/shape.exe
+tasks/02.images_and_colors/crt/Debug/crt.exe
+tasks/03.vectors/rays/Debug/rays.exe
 
 Results:
 Can be found in 'results' folder in the project root directory
