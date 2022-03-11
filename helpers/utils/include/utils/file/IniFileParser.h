@@ -13,9 +13,6 @@
 
 // Forward declarations
 
-#include <iostream>
-#include <cctype>
-
 using IniFileSection = std::unordered_map<std::string, std::string>;
 using IniFileData = std::unordered_map<std::string, IniFileSection>;
 
