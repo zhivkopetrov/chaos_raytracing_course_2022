@@ -69,6 +69,8 @@ ErrorCode PpmFileWritter::openStream(const std::string &file) {
     return ErrorCode::FAILURE;
   }
 
+  _fileStream << std::nounitbuf;
+
   return ErrorCode::SUCCESS;
 }
 
