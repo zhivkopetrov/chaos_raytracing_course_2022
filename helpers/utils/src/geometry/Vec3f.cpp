@@ -89,8 +89,11 @@ void Vec3f::writeInt32SpacedData(std::ostream &out) const {
 }
 
 void Vec3f::writeCharData(std::ostream &out) const {
-  out << static_cast<char>(_x) << static_cast<char>(_y)
-      << static_cast<char>(_z);
+  const char data[3] {
+    static_cast<char>(_x), static_cast<char>(_y), static_cast<char>(_z)
+  };
+
+  out << data;
 }
 
 Vec3f operator+(const Vec3f &left, const Vec3f &right) {
