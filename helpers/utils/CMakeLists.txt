@@ -27,6 +27,7 @@ add_library(
         ${_INC_DIR}/geometry/Point2f.h
         ${_INC_DIR}/geometry/Vec3f.h
         ${_INC_DIR}/geometry/Ray.h
+        ${_INC_DIR}/geometry/Triangle.h
         ${_INC_DIR}/geometry/CoordinateTransform.h
         ${_INC_DIR}/time/Time.h
         ${_INC_DIR}/log/Log.h
@@ -37,6 +38,7 @@ add_library(
         ${_SRC_DIR}/geometry/Point2f.cpp
         ${_SRC_DIR}/geometry/Vec3f.cpp
         ${_SRC_DIR}/geometry/Ray.cpp
+        ${_SRC_DIR}/geometry/Triangle.cpp
         ${_SRC_DIR}/geometry/CoordinateTransform.cpp
         ${_SRC_DIR}/time/Time.cpp
         ${_SRC_DIR}/log/Log.cpp

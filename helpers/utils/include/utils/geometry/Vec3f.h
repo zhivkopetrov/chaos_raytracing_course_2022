@@ -73,6 +73,7 @@ inline const Color24 CYAN(0, 255, 255);
 inline const Color24 MAGENTA(255, 0, 255);
 inline const Color24 YELLOW(255, 255, 0);
 inline const Color24 ORANGE(255, 128, 0);
+inline const Color24 GRAY(192, 192, 0);
 } //namespace Colors24
 
 #endif /* UTILS_VEC3F_H_ */
