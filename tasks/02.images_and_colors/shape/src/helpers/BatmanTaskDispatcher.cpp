@@ -13,16 +13,16 @@ namespace {
 int32_t getMaxSupportedThreadsCount() {
   const auto maxThreads = std::thread::hardware_concurrency();
   if (0 == maxThreads) {
-    return 1; //hint failed
+    return 1;  // hint failed
   }
   return static_cast<int32_t>(maxThreads);
 }
 
-//Embracingly parallel task - no locks needed
+// Embracingly parallel task - no locks needed
 void calculateGeometryChunk(const BatmanShapeConfig &cfg,
                             int32_t rowsToCalculate, int32_t startRowIdx,
                             int32_t rowWidth, Color24 *outPixels) {
-  //increase the precision
+  // increase the precision
   const double shapeScale = static_cast<double>(cfg.scale);
   Point2f target;
   int32_t relativePixelId = 0;
@@ -37,20 +37,20 @@ void calculateGeometryChunk(const BatmanShapeConfig &cfg,
       }
 
       if (BatmanGeometry::inBatman(target, cfg.origin, shapeScale)) {
-        outPixels[relativePixelId] = Colors24::BLACK;
+        outPixels[relativePixelId] = Colors24::WHITE;
       }
 
       ++relativePixelId;
     }
   }
 }
-}
+}  // namespace
 
 std::vector<Color24> BatmanTaskDispatcher::calculateGeometry(
     const BatmanShapeConfig &cfg, int32_t imageWidth, int32_t imageHeight) {
-  std::vector<Color24> pixels(imageWidth * imageHeight, Colors24::YELLOW);
+  std::vector<Color24> pixels(imageWidth * imageHeight, Colors24::BLACK);
   const auto maxThreads = getMaxSupportedThreadsCount();
-  const auto additionalThreads = maxThreads - 1; //leave work for main thread
+  const auto additionalThreads = maxThreads - 1;  // leave work for main thread
   const auto pixelRowsPerThread = imageHeight / maxThreads;
 
   std::vector<std::thread> threadPool;
@@ -58,17 +58,17 @@ std::vector<Color24> BatmanTaskDispatcher::calculateGeometry(
   auto offset = 0;
   auto startRowIdx = 0;
   for (auto threadId = 0; threadId < additionalThreads; ++threadId) {
-
     threadPool.emplace_back(calculateGeometryChunk, std::ref(cfg),
-        pixelRowsPerThread, startRowIdx, imageWidth, &pixels[offset]);
+                            pixelRowsPerThread, startRowIdx, imageWidth,
+                            &pixels[offset]);
 
     startRowIdx += pixelRowsPerThread;
     offset += (pixelRowsPerThread * imageWidth);
   }
 
-  //utilize main thread
+  // utilize main thread
   calculateGeometryChunk(cfg, pixelRowsPerThread, startRowIdx, imageWidth,
-      &pixels[offset]);
+                         &pixels[offset]);
 
   for (auto &thread : threadPool) {
     thread.join();

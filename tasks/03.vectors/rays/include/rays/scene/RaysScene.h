@@ -2,11 +2,12 @@
 #define RAYS_RAYSSCENE_H_
 
 // System headers
+#include <cstdint>
 #include <vector>
 
 // Other libraries headers
-#include "utils/geometry/Vec3f.h"
 #include "utils/geometry/Ray.h"
+#include "utils/geometry/Vec3f.h"
 
 // Own components headers
 
@@ -20,11 +21,11 @@ struct RaysSceneConfig {
 };
 
 class RaysScene {
-public:
+ public:
   void compose(const RaysSceneConfig &cfg);
   std::vector<Color24> produceSceneGradient() const;
 
-private:
+ private:
   RaysSceneConfig _cfg;
   std::vector<Ray> _sceneRays;
 };

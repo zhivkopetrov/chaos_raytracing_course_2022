@@ -2,6 +2,7 @@
 #define SHAPE_BATMANTASKDISPATCHER_H_
 
 // System headers
+#include <cstdint>
 #include <vector>
 
 // Other libraries headers
@@ -14,10 +15,10 @@
 // Forward declarations
 
 class BatmanTaskDispatcher {
-public:
+ public:
   BatmanTaskDispatcher() = delete;
 
-  //return value optimization should kick in
+  // return value optimization should kick in
   static std::vector<Color24> calculateGeometry(const BatmanShapeConfig &cfg,
                                                 int32_t imageWidth,
                                                 int32_t imageHeight);

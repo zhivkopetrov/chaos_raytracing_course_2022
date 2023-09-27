@@ -2,6 +2,7 @@
 #define UTILS_COORDINATETRANSFORM_H_
 
 // System headers
+#include <cstdint>
 #include <vector>
 
 // Other libraries headers
@@ -13,7 +14,7 @@
 // Forward declarations
 
 class CoordinateTransform {
-public:
+ public:
   CoordinateTransform() = delete;
 
   static std::vector<Point2f> getMidPixelRaster(int32_t imageWidth,
